@@ -9,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.simplecalculator"
+        applicationId "com.seratus.simplecalculator"
         minSdk 21
         targetSdk 31
         versionCode 1
@@ -55,6 +55,7 @@ dependencies {
     // ViewModel
     def lifecycle_version = "2.5.0-rc01"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation 'androidx.activity:activity-ktx:1.4.0'
 
     // dagger hilt
     implementation "com.google.dagger:hilt-android:$dagger_hilt_version"

@@ -1,4 +1,4 @@
-package com.example.simplecalculator
+package com.seratus.simplecalculator
 
 import org.junit.Test
 

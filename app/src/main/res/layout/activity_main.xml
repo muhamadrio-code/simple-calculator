@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,12 +8,393 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/calculationText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center|end"
+        android:paddingHorizontal="@dimen/padding_16"
+        tools:text="129+22"
+        android:textStyle="bold"
+        android:textAlignment="gravity"
+        android:textSize="@dimen/display_text_small"
+        app:layout_constraintBottom_toTopOf="@+id/resultText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center|end"
+        android:paddingHorizontal="@dimen/padding_16"
+        android:paddingVertical="@dimen/padding_8"
+        android:text="0"
+        tools:text="151"
+        android:maxLength="12"
+        android:ellipsize="marquee"
+        android:textAlignment="gravity"
+        android:textStyle="bold"
+        android:textSize="@dimen/result_text"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".35" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modulo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:text="%"
+            android:tag="OPERATOR_MODULO"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/modulo1"
+            app:layout_constraintEnd_toStartOf="@+id/ce"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ce"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:tag="OPERATOR_CLEAR"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:text="CE"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo"
+            app:layout_constraintEnd_toStartOf="@+id/clear"
+            app:layout_constraintStart_toEndOf="@+id/modulo"
+            app:layout_constraintTop_toTopOf="@+id/modulo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clear"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:text="C"
+            android:tag="OPERATOR_CLEAR_ALL"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo"
+            app:layout_constraintEnd_toStartOf="@+id/delete"
+            app:layout_constraintStart_toEndOf="@+id/ce"
+            app:layout_constraintTop_toTopOf="@+id/modulo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="del"
+            app:iconGravity="start"
+            android:tag="OPERATOR_DELETE"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clear"
+            app:layout_constraintTop_toTopOf="@+id/modulo" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modulo1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:layout_margin="4dp"
+            android:text="^"
+            android:tag="OPERATOR_POWER"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            app:layout_constraintBottom_toTopOf="@+id/modulo2"
+            app:layout_constraintEnd_toStartOf="@+id/ce1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modulo"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ce1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="sqr"
+            android:tag="OPERATOR_SQUARE"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo1"
+            app:layout_constraintEnd_toStartOf="@+id/clear1"
+            app:layout_constraintStart_toEndOf="@+id/modulo1"
+            app:layout_constraintTop_toTopOf="@+id/modulo1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clear1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="sqrt"
+            android:tag="OPERATOR_SQUARE_ROOT"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo1"
+            app:layout_constraintEnd_toStartOf="@+id/delete1"
+            app:layout_constraintStart_toEndOf="@+id/ce1"
+            app:layout_constraintTop_toTopOf="@+id/modulo1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="/"
+            android:tag="OPERATOR_DIVIDE"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clear1"
+            app:layout_constraintTop_toTopOf="@+id/modulo1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modulo2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:layout_margin="4dp"
+            android:text="1"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            app:layout_constraintBottom_toTopOf="@+id/modulo3"
+            app:layout_constraintEnd_toStartOf="@+id/ce2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modulo1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ce2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="2"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo2"
+            app:layout_constraintEnd_toStartOf="@+id/clear2"
+            app:layout_constraintStart_toEndOf="@+id/modulo2"
+            app:layout_constraintTop_toTopOf="@+id/modulo2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clear2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="3"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo2"
+            app:layout_constraintEnd_toStartOf="@+id/delete2"
+            app:layout_constraintStart_toEndOf="@+id/ce2"
+            app:layout_constraintTop_toTopOf="@+id/modulo2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="x"
+            android:tag="OPERATOR_MULTIPLICATION"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clear2"
+            app:layout_constraintTop_toTopOf="@+id/modulo2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modulo3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:layout_margin="4dp"
+            android:text="4"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            app:layout_constraintBottom_toTopOf="@+id/modulo4"
+            app:layout_constraintEnd_toStartOf="@+id/ce3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modulo2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ce3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="5"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo3"
+            app:layout_constraintEnd_toStartOf="@+id/clear3"
+            app:layout_constraintStart_toEndOf="@+id/modulo3"
+            app:layout_constraintTop_toTopOf="@+id/modulo3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clear3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="6"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo3"
+            app:layout_constraintEnd_toStartOf="@+id/delete3"
+            app:layout_constraintStart_toEndOf="@+id/ce3"
+            app:layout_constraintTop_toTopOf="@+id/modulo3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="-"
+            android:tag="OPERATOR_MINUS"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clear3"
+            app:layout_constraintTop_toTopOf="@+id/modulo3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modulo4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:layout_margin="4dp"
+            android:text="7"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            app:layout_constraintBottom_toTopOf="@+id/modulo5"
+            app:layout_constraintEnd_toStartOf="@+id/ce4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modulo3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ce4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="8"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo4"
+            app:layout_constraintEnd_toStartOf="@+id/clear4"
+            app:layout_constraintStart_toEndOf="@+id/modulo4"
+            app:layout_constraintTop_toTopOf="@+id/modulo4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clear4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="9"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo4"
+            app:layout_constraintEnd_toStartOf="@+id/delete4"
+            app:layout_constraintStart_toEndOf="@+id/ce4"
+            app:layout_constraintTop_toTopOf="@+id/modulo4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="+"
+            android:tag="OPERATOR_PLUS"
+            style="@style/Theme.AppCompat.CalculatorButton"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clear4"
+            app:layout_constraintTop_toTopOf="@+id/modulo4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/modulo5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:layout_margin="4dp"
+            android:text="-/+"
+            android:tag="OPERATOR_NEGATIVE"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ce5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modulo4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ce5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="0"
+            android:tag="NUMBER"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo5"
+            app:layout_constraintEnd_toStartOf="@+id/clear5"
+            app:layout_constraintStart_toEndOf="@+id/modulo5"
+            app:layout_constraintTop_toTopOf="@+id/modulo5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clear5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="."
+            android:tag="OPERATOR_COMA"
+            style="@style/Theme.AppCompat.CalculatorButtonNumber"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo5"
+            app:layout_constraintEnd_toStartOf="@+id/delete5"
+            app:layout_constraintStart_toEndOf="@+id/ce5"
+            app:layout_constraintTop_toTopOf="@+id/modulo5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/delete5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:ignore="HardcodedText"
+            android:text="="
+            android:tag="OPERATOR_RESULT"
+            style="@style/Theme.AppCompat.CalculatorButtonEqual"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/modulo5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clear5"
+            app:layout_constraintTop_toTopOf="@+id/modulo5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
